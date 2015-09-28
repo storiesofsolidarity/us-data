@@ -59,14 +59,21 @@ if __name__ == "__main__":
     for (fips, data) in split_dict_by(zcta_merged, 'properties', 'state').items():
         state_name = STATE_FIPS[fips]
 
-        geojson_collection = {
-            "type": "GeometryCollection",
-            "geometries": list()
+        topojson_collection = {
+            "type": "Topology",
+            "objects": {
+                "zctas": {
+                    "type": "GeometryCollection",
+                    "geometries": list()
+                }
+            },
+            "arcs": list()
         }
 
         for zcta in data:
-            geojson_collection['geometries'].append(topojson_feature(zcta))
+            topojson_collection['objects']['zctas']['geometries'].append(topojson_feature(zcta))
+            topojson_collection['arcs'].append(zcta['arcs'])
 
         print "writing %d ZCTAs in %s" % (len(data), state_name)
         out_fn = relative_path('../zcta/%s.topo.json' % state_name.replace(' ', '_'))
-        write_json(out_fn, geojson_collection)
+        write_json(out_fn, topojson_collection)
