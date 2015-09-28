@@ -105,4 +105,4 @@ if __name__ == "__main__":
             geojson_collection['features'].append(geojson_feature(place))
 
         print "writing %d places in %s" % (len(data), state_name)
-        write_out('states/%s.places.json' % state_name, geojson_collection)
+        write_out('../places/%s.geo.json' % state_name, geojson_collection)
