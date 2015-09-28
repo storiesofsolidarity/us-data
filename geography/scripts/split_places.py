@@ -1,4 +1,4 @@
-import sys, csv, json, collections
+import os, sys, csv, json, collections
 
 # map colum names from gazetteer tsv to output json
 COLUMNS = {
@@ -24,6 +24,11 @@ STATES = {
     'SD': 'South Dakota', 'TN': 'Tennessee', 'TX': 'Texas', 'UT': 'Utah', 'VT': 'Vermont',
     'VA': 'Virginia', 'WA': 'Washington', 'WV': 'West Virginia', 'WI': 'Wisconsin', 'WY': 'Wyoming'
 }
+
+
+def relative_path(fn):
+    return os.path.abspath(os.path.join(os.path.dirname(__file__), fn))
+
 
 def converting_csv_reader(utf8_data, dialect=csv.excel, **kwargs):
     csv_reader = csv.reader(utf8_data, dialect=dialect, **kwargs)
@@ -86,7 +91,7 @@ if __name__ == "__main__":
     if len(sys.argv) > 1:
         fn = sys.argv[1]
     else:
-        fn = "Gaz_places_national.txt"
+        fn = relative_path("../raw/Gaz_places_national.txt")
     try:
         gazeteer = load_gazetteer(fn)
     except IOError:
@@ -105,4 +110,5 @@ if __name__ == "__main__":
             geojson_collection['features'].append(geojson_feature(place))
 
         print "writing %d places in %s" % (len(data), state_name)
-        write_out('../places/%s.geo.json' % state_name, geojson_collection)
+        out_fn = relative_path('../places/%s.geo.json' % state_name)
+        write_out(out_fn, geojson_collection)
