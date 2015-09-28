@@ -49,7 +49,8 @@ STATE_FIPS = {
     '53': 'Washington',
     '54': 'West Virginia',
     '55': 'Wisconsin',
-    '56': 'Wyoming'
+    '56': 'Wyoming',
+    '72': 'Puerto Rico',
 }
 
 STATE_ABBR = {
