@@ -9,7 +9,7 @@ STATE_FIPS = {
     '10': 'Delaware',
     '11': 'District of Columbia',
     '12': 'Florida',
-    '13': 'Geogia',
+    '13': 'Georgia',
     '15': 'Hawaii',
     '16': 'Idaho',
     '17': 'Illinois',
