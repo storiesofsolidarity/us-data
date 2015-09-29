@@ -1,1 +1,1 @@
-{"type": "FeatureCollection", "features": [{"geometry": {"type": "Point", "coordinates": [-77.017094, 38.904149]}, "type": "Feature", "id": "Washington", "properties": {"fips": "1150000"}}]}
+{"type": "FeatureCollection", "features": [{"geometry": {"type": "Point", "coordinates": [-77.017229, 38.904103]}, "type": "Feature", "id": "Washington", "properties": {"fips": "1150000"}}]}
