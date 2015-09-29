@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+#map {
+	margin: 0;
+	width: 960px;
+	height: 500px;
+}
+
+path {
+    fill: #000;
+    fill-opacity: .2;
+    stroke: #eee;
+    stroke-width: 1.5px;
+}
+
+path:hover {
+    fill: red;
+    fill-opacity: .7;
+}
+</style>
+<body>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="/geography/test/topojson.js"></script>
+<script>
+
+var width = 960,
+    height = 1160;
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+var projection = d3.geo.albersUsa()
+    .scale(1000)
+    .translate([width / 2, height / 2]);
+
+var drawTopo = function(error, data) {
+  if (error) return console.error(error);
+
+  for(var geomKey in data.objects) { break; }
+  var features = topojson.feature(data, data.objects[geomKey]).features;
+
+  svg.selectAll("path")
+    .data(features)
+  .enter().append("path")
+    .attr("d", d3.geo.path().projection(projection));
+}
+
+var all_states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'District_of_Columbia', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming', 'Puerto Rico'];
+
+for (i in all_states) {
+  var s = all_states[i].replace(' ', '_');
+  console.log(s);
+  d3.json("/geography/zcta/"+s+".topo.json", drawTopo);
+}
+</script>
