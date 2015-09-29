@@ -56,7 +56,7 @@ raw/zcta/state/geo: raw/zcta/us.geo.json
 	@# use shell syntax here, with double-$ to escape from make
 	for file in raw/zcta/state/us-*.json; do \
 		state=`echo "$$file" | awk -F '[/_\.\-]' '{gsub(" ","_",$$5); print $$5}'`; \
-		mv -i "$$file" raw/zcta/state/$$state.geo.json; \
+		mv "$$file" raw/zcta/state/$$state.geo.json; \
 	done
 
 # create topojson and simplify
@@ -65,7 +65,7 @@ zcta/state: raw/zcta/state/geo
 	@# use shell syntax here, with double-$ to escape from make
 	for file in raw/zcta/state/*.geo.json; do \
 		state=`echo "$$file" | awk -F '[/\.\-]' '{gsub(" ","_",$$4); print $$4}'`; \
-		topojson "$$file" -q 1e6 -s 7e-7 -o "zcta/$$state.topo.json"; \
+		topojson "$$file" -q 1e6 -s 1e-8 -o "zcta/$$state.topo.json"; \
 	done
 
 # Places from US Gazetteer
