@@ -60,7 +60,7 @@ raw/zcta/state/geo: raw/zcta/us.geo.json
 	done
 
 # create topojson and simplify
-zcta/state: raw/zcta/state/geo
+zcta/state/topo: raw/zcta/state/geo
 	mkdir -p zcta
 	@# use shell syntax here, with double-$ to escape from make
 	for file in raw/zcta/state/*.geo.json; do \
