@@ -15,16 +15,18 @@ def csv_reader_converter(utf8_data, dialect=csv.excel, **kwargs):
         yield [unicode(cell, 'latin-1') for cell in row]
 
 
-def load_csv_columns(filename, column_names=None, delimiter=','):
+def load_csv_columns(filename, column_names=None, delimiter=',', quoting=csv.QUOTE_MINIMAL):
     r = []
     with open(filename, 'r') as f:
-        data_file = csv_reader_converter(f, delimiter=delimiter, quoting=csv.QUOTE_NONE)
+        data_file = csv_reader_converter(f, delimiter=delimiter, quoting=quoting)
         headers = next(data_file, None)  # parse the headers
         columns = {}
         for (i, h) in enumerate(headers):
             h = h.strip()
             if h in column_names or not column_names:
                 columns[i] = h
+        print "headers", headers
+        print "columns", column_names
 
         for line in data_file:
             d = {}

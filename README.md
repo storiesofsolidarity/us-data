@@ -10,6 +10,7 @@ Contextual geographic and economic data to display on StoriesOfSolidarity.org
     * `make places`
 * Zipcode tabulation areas from 2012 [TIGER](http://www2.census.gov/geo/tiger/TIGER2012/ZCTA5/) data, joined to [Census Relationship Files](https://www.census.gov/geo/maps-data/data/relationship.html) and converted to geojson by state with [mapshaper](https://github.com/mbloch/mapshaper), and simplified to [topojson](https://github.com/mbostock/topojson).
 	* `make zcta/state/topo`
+* Zipcode data files from [USZipcodes.org](http://www.unitedstateszipcodes.org/zip-code-database/), converted to individual json files with [python](geography/scripts/split_zipcodes.py) by state as geojson
 
 ## Economic
 

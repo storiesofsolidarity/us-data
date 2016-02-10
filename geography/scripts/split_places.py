@@ -1,4 +1,4 @@
-import sys
+import sys, csv
 from constants import STATE_ABBR
 from utils import relative_path, load_csv_columns, split_dict_by, write_json
 
@@ -32,7 +32,7 @@ if __name__ == "__main__":
     else:
         fn = relative_path("../raw/Gaz_places_national.txt")
     try:
-        gazetteer = load_csv_columns(fn, GAZETTEER_COLUMNS, delimiter='\t')
+        gazetteer = load_csv_columns(fn, GAZETTEER_COLUMNS, delimiter='\t', quoting=csv.QUOTE_NONE)
     except IOError:
         print "unable to load", fn
         sys.exit(-1)
